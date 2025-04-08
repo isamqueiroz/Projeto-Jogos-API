@@ -17,7 +17,7 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                Jogo jogoBuscado = _context.jogos.Find(id);
+                Jogo jogoBuscado = _context.Jogo.Find(id);
 
                 if (jogo != null)
                 {
@@ -25,11 +25,11 @@ namespace Jogos_API.Repositories
                     jogo.Plataforma = jogo.Plataforma;
                 }
 
-                _context.jogos.Update(jogo!);
+                _context.Jogo.Update(jogo!);
 
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 throw;
             }
@@ -41,12 +41,12 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                _context.jogos.Add(novoJogo);
+                _context.Jogo.Add(novoJogo);
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
 
@@ -54,11 +54,11 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                Jogo jogoBuscado = _context.jogos.Find(id);
+                Jogo jogoBuscado = _context.Jogo.Find(id)!;
 
                 if (jogoBuscado != null)
                 {
-                    _context.jogos.Remove(jogoBuscado);
+                    _context.Jogo.Remove(jogoBuscado);
                 }
                 _context.SaveChanges();
             }
@@ -71,7 +71,7 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                return _context.jogos.Select(e => new Jogo
+                return _context.Jogo.Select(e => new Jogo
                 {
                     JogoId = e.JogoId,
                     NomeDoJogo = e.NomeDoJogo,

@@ -17,7 +17,7 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                Usuario usuarioBuscado = _context.Usuarios.Find(id)!;
+                Usuario usuarioBuscado = _context.Usuario.Find(id)!;
 
                 if (usuarioBuscado != null)
                 {
@@ -25,7 +25,7 @@ namespace Jogos_API.Repositories
                     usuarioBuscado.NickName = usuario.NickName;
                 }
 
-                _context.Usuarios.Update(usuarioBuscado!);
+                _context.Usuario.Update(usuarioBuscado!);
 
                 _context.SaveChanges();
             }
@@ -40,7 +40,7 @@ namespace Jogos_API.Repositories
             {
                 usuario.UsuarioId = Guid.NewGuid();
 
-                _context.Usuarios.Add(usuario);
+                _context.Usuario.Add(usuario);
 
                 _context.SaveChanges();
             }
@@ -53,11 +53,11 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                Usuario usuario = _context.Usuarios.Find(id)!;
+                Usuario usuario = _context.Usuario.Find(id)!;
 
                 if (usuario != null)
                 {
-                    _context.Usuarios.Remove(usuario);
+                    _context.Usuario.Remove(usuario);
                 }
                 _context.SaveChanges();
             }
@@ -70,7 +70,7 @@ namespace Jogos_API.Repositories
         {
             try
             {
-                return _context.Usuarios.ToList();
+                return _context.Usuario.ToList();
             }
             catch (Exception)
             {

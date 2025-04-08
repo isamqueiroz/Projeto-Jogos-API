@@ -18,7 +18,6 @@ namespace Jogos_API.Domains
         public string? NomeDoJogo { get; set; }
 
         [Column(TypeName = "VARCHAR(50)")]
-
         public string? Plataforma { get; set; }
    
     }

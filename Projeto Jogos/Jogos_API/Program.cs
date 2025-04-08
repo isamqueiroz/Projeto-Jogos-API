@@ -21,6 +21,7 @@ builder.Services // Acessa a coleção de serviços da aplicação (Dependency I
 builder.Services.AddDbContext<JogosDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
 // Adicionar o  e a interface ao container de injeção de dependência
 builder.Services.AddScoped<IUsuariosRepository, UsuariosRepository>();
 builder.Services.AddScoped<IJogosRepository, JogosRepository>();
@@ -40,8 +41,8 @@ builder.Services.AddSwaggerGen(options =>
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {
-            Name = "Clara Crastechini",
-            Url = new Uri("https://github.com/Clara-Crastechini")
+            Name = "Herik Spada",
+            Url = new Uri("https://github.com/HerikSpada7/SystemGameAPI")
         },
         License = new OpenApiLicense
         {
@@ -50,6 +51,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
 
 // CORS
 builder.Services.AddCors(options =>
@@ -63,6 +65,30 @@ builder.Services.AddCors(options =>
         });
 });
 
-
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger(options =>
+    {
+        options.SerializeAsV2 = true;
+    });
+
+    app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
+}
+
+//Adiciona o Cors(política criada)
+app.UseCors("CorsPolicy");
+
+//Adicionar o mapeamento dos controllers
+app.MapControllers();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.Run();

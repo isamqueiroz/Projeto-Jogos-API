@@ -13,8 +13,8 @@ namespace Jogos_API.Context
         { 
         }
 
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet <Jogo> jogos { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet <Jogo> Jogo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
